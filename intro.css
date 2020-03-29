@@ -34,3 +34,7 @@ main {
 span {
     margin: 0 1vw;
 }
+
+span:hover {
+    cursor: pointer;
+}
