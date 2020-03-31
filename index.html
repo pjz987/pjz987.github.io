@@ -20,7 +20,7 @@
         <canvas width="1920" height="1080"></canvas>
         <div id="app">
           <span @click="backward"><</span>
-          <transition name="slide" mode="out-in">
+          <transition name="fall" enter-active-class="fallin" leave-active-class="fallout" mode="out-in">
             <component :is="slides[i]"></component>
           </transition>
           <span @click="forward">/></span>

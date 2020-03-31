@@ -1,0 +1,300 @@
+* {
+    font-family: 'Odibee Sans', cursive;
+}
+
+body {
+    min-height: 100vh;
+    background-color: hotpink;
+}
+
+main.day {
+    flex-direction: column;
+    height: auto;
+    justify-content: space-evenly;
+}
+
+.subnav header {
+    text-decoration: underline;
+}
+
+header.small {
+    font-size: 1.5rem;
+}
+
+header.big {
+    font-size: 2rem;
+    text-decoration: underline;
+}
+
+#outer-day {
+    display: flex;
+    flex-wrap: wrap;
+    height: auto;
+    min-width: 80vw;
+    justify-content: space-around;
+    border: 2px solid black;
+}
+
+.middle-day {
+    width: 35vw;
+    display: flex;
+    flex-direction: column;
+    border: 2px dotted black;
+    margin-top: 2vh;
+    justify-content: space-between;
+    min-height: 22.5vh;
+}
+
+header.small {
+    border-bottom: 2px solid black;
+}
+
+.goal-div {
+    display: flex;
+    justify-content: space-between;
+    width: 50%;
+    font-size: 1.25rem;
+}
+
+.prog-div {
+    display: flex;
+    justify-content: space-between;
+    min-width: 17vw;
+    font-size: 1.125rem;
+}
+
+/* main.day button {
+    font-size: 1.5rem;
+} */
+
+#inner-entry {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    height: 17.5vh;
+    flex-wrap: wrap;
+    overflow-y: auto;
+}
+
+.entry {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin: 0 0.5vw;
+}
+
+/* div.name {
+    text-decoration: underline;
+} */
+
+#outer-entry {
+    min-width: 32vw;
+    max-width: 64vw;
+    width: auto;
+    display: flex;
+    flex-direction: column;
+    border: 2px dotted black;
+    margin: 2vh 0;
+    justify-content: space-between;
+    height: 22.5vh;
+}
+
+a {
+    color: black;
+    text-decoration: none;
+    transition: 0.5s;
+}
+
+a:hover {
+    color: hotpink;
+}
+
+#button-container {
+    font-size: 2rem;
+    margin-bottom: 5vh;
+}
+
+#button-container button{
+    font-size: 2.5rem;
+}
+
+#buttons-container {
+    display: flex;
+    justify-content: center;
+}
+
+canvas {
+    outline: 2px dotted black;
+}
+
+#goals-container, #prog-old, #inner-entry {
+    display: none;
+}
+
+/* #progress-container {
+    border: 2px dotted black;
+} */
+
+.buttons {
+    font-size: 2.5rem;
+}
+
+#entries-grid {
+    display: grid;
+    grid-template-columns: repeat(5, auto);
+    column-gap: 1vw;
+    row-gap: 1vh;
+    overflow-y: auto;
+    font-size: 1.25rem;
+}
+
+header.smaller {
+    text-decoration: underline;
+}
+
+#entries-grid div {
+    display: block;
+    text-align: end;
+    width: 100%;
+}
+
+#entries-grid div.name {
+    text-align: start;
+}
+
+@media screen and (max-width: 700px) {
+    body {
+        width: auto;
+        height: auto;
+    }
+    main {
+        height: auto;
+    }
+    canvas {
+        display: none;
+    }
+    #goals-container, #prog-old, #outer-day {
+        display: block;
+    }
+    * {
+        font-size: 1rem;
+    }
+    header.day {
+        font-size: 1.5rem;
+    }
+    button {
+        font-size: 1.25rem;
+    }
+    .buttons {
+        font-size: 1.25rem;
+    }
+}
+
+/* BASE TEMPLATE */
+
+nav {
+    height: 15vh;
+    background-color: greenyellow;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.subnav {
+    height: 10vh;
+}
+
+nav * {
+    font-family: 'Odibee Sans', cursive;
+    font-size: 3rem;
+}
+
+* {
+    font-family: 'Odibee Sans', cursive;
+}
+
+@font-face {
+    font-family: 'Odibee Sans', cursive;
+    src: url("https://fonts.googleapis.com/css?family=Odibee+Sans&display=swap");
+}
+
+#padding {
+    background-color: hotpink;
+    height: 3vh;
+}
+
+button:hover {
+    color: hotpink;
+    cursor: pointer;
+}
+
+/* HOME */
+
+* {
+    box-sizing: border-box;
+}
+
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 72vh;
+    background-color: hotpink;
+}
+
+.home {
+    font-size: 3rem;
+}
+
+main button:hover {
+    color: greenyellow;
+}
+
+.container.home {
+    border: 2px solid blue;
+}
+
+header.big {
+    font-size: 2rem;
+    text-decoration: underline;
+}
+
+button {
+    transition: 0.5s;
+}
+
+@media screen and (max-width: 700px) {
+    body {
+        width: auto;
+    }
+    * {
+        font-size: 1rem;
+    }
+    .subnav header {
+        font-size: 1.5rem;
+    }
+    button {
+        font-size: 1.25rem;
+    }
+    nav {
+        height: 10vh;
+    }
+    .supernav a button {
+        min-width: 80px;
+    }
+}
+
+/* GENERAL STUFF */
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance:textfield;
+}
