@@ -24,12 +24,11 @@ main {
 }
 
 .slide-enter-active, .slide-leave-active {
-    transition: opacity .4s, margin .4s, color .4s;
+    transition: opacity .4s, margin .4s;
 }
 
 .slide-enter, .slide-leave-to {
     opacity: 0;
-    color: white;
 }
 
 .slide-enter {
