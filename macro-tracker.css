@@ -210,6 +210,10 @@ nav * {
     font-size: 3rem;
 }
 
+.supernav header {
+    font-size: 4rem;
+}
+
 * {
     font-family: 'Odibee Sans', cursive;
 }
@@ -264,6 +268,29 @@ button {
     transition: 0.5s;
 }
 
+.background {
+    transition: all 5s, ease;
+}
+
+.blurry {
+    filter: blur(1px);
+    opacity: 0.4;
+}
+
+#entry-form div {
+    display: flex;
+    justify-content: space-between;
+    margin: 1vh 0;
+}
+
+#entry-form button {
+    width: 100%;
+}
+
+#entry-form * {
+    font-size: 1.5rem;
+}
+
 @media screen and (max-width: 700px) {
     body {
         width: auto;
@@ -297,4 +324,21 @@ input::-webkit-inner-spin-button {
 /* Firefox */
 input[type=number] {
   -moz-appearance:textfield;
+}
+
+#entry-form {
+    position: absolute;
+    width: 40vw;
+}
+
+.popup-transition {
+    transition: all 3s ease;
+    /* opacity: 1; */
+    margin-bottom: 300%;
+    /* position: absolute; */
+}
+
+.popup-enter, .popup-leave {
+    opacity: 0;
+    margin-bottom: 0%;
 }

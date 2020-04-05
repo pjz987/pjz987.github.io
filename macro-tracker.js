@@ -1,3 +1,56 @@
+let customName = {
+    props: ['name'],
+    template: `<div>
+    <span>Name:</span>
+    <input id="name-input" value="Chicken Burrito" class="custom" type="text" :name="name" @input="$emit('input', $event.target.value)">
+    </div>`
+};
+
+let nameInput = document.querySelector('#name-input');
+
+let customKcal = {
+    props: ['kcal'],
+    template: `<div>
+        <span>Calories:</span>
+        <input value="990" class="custom" type="number" :kcal="kcal" @input="$emit('input', $event.target.value)">
+    </div>`
+};
+
+let customFat = {
+    props: ['fat'],
+    template: `<div>
+        <span>Grams of Fat</span>
+        <input value="30" class="custom" type="number" :fat="fat" @input="$emit('input', $event.target.value)">
+    </div>`
+};
+
+let customCarb = {
+    props: ['carb'],
+    template: `<div>
+        <span>Grams of Carbohydrates:</span>
+        <input value="124" class="custom" type="number" :carb="carb" @input="$emit('input', $event.target.value)">
+    </div>`
+};
+
+let customProtein = {
+    props: ['protein'],
+    template: `<div>
+        <span>Grams of Protein:</span>
+        <input value="54" class="custom" type="number" :protein="protein" @input="$emit('input', $event.target.value)">
+    </div>`
+};
+
+let entryTemplate = {
+    props: ['entry'],
+    template: `<template>
+        <div class="name" @click="remove(entry)" :entry="entry">{{ entry.name }}</div>
+        <div>{{ entry.kcal }}</div>
+        <div>{{ entry.fat }}</div>
+        <div>{{ entry.carb }}</div>
+        <div>{{ entry.protein }}</div>
+    </template>`
+}
+
 var tracker = new Vue({
     el: '#tracker',
     data: {
@@ -9,16 +62,78 @@ var tracker = new Vue({
             protein: 182,
         },
         totals: {
-            kcal: 300,
-            fat: 50,
-            carb: 50,
-            protein: 50,
+            kcal: 0,
+            fat: 0,
+            carb: 0,
+            protein: 0,
         },
         entries: [],
+        name: 'Chicken Burrito',
+        kcal: '990',
+        fat: '30',
+        carb: '124',
+        protein: '54',
+        showEntry: false,
+        blurBk: 'blurry',
+        classBk: 'background',
     },
-    directives: {
-        // drawGraph,
-    }
+    watch: {
+        entries: function() {
+            let totalsObj = {
+                kcal: 0,
+                fat: 0,
+                carb: 0,
+                protein: 0,
+            }
+            let keys = Object.keys(totalsObj);
+            console.log(keys);
+            for (let i=0; i<this.entries.length; i++) {
+                let entry = this.entries[i];
+                for (let j=0; j<keys.length; j++) {
+                    let key = keys[j]
+                    console.log(key, 'hey')
+                    totalsObj[key] += entry[key];
+                    console.log(totalsObj, 'totalsobj')
+                }
+            }
+            console.log(totalsObj)
+            this.totals = totalsObj;
+            drawGraph();
+        },
+    },
+    methods: {
+        toggleEntry: function() {
+            this.showEntry = !this.showEntry;
+        },
+        trackIt: function() {
+            this.entries.push({
+                name: this.name,
+                kcal: parseInt(this.kcal),
+                fat: parseInt(this.fat),
+                carb: parseInt(this.carb),
+                protein: parseInt(this.protein),
+            });
+            this.name = '';
+            this.kcal = '';
+            this.fat = '';
+            this.carb = '';
+            this.protien = '';
+        },
+        remove: function(entry) {
+            console.log('remove', entry)
+            let index = this.entries.indexOf(entry)
+            console.log(index)
+            this.entries.splice(index, 1);
+        },
+    },
+    components: {
+        'custom-name': customName,
+        'custom-kcal': customKcal,
+        'custom-fat': customFat,
+        'custom-carb': customCarb,
+        'custom-protein': customProtein,
+        'entry-template': entryTemplate,
+    },
 })
 
 // var overUnder = JSON.parse(document.querySelector('#over_under').textContent);
@@ -195,9 +310,9 @@ function drawGraph() {
     // if (countUp.kcal < totals.kcal) {
     //     countUp.kcal ++;
     //     requestAnimationFrame(drawGraph);
-    if (countUp.kcal < tracker.totals.kcal - tracker.macros.kcal / 50) {
+    if (countUp.kcal < tracker.totals.kcal) {
         countUp.kcal = countUp.kcal + (tracker.macros.kcal / 240)
-        if (countUp.kcal > tracker.totals.kcal - tracker.macros.kcal / 50) {
+        if (countUp.kcal > tracker.totals.kcal) {
             countUp.kcal = tracker.totals.kcal
         }
         requestAnimationFrame(drawGraph);
@@ -205,9 +320,19 @@ function drawGraph() {
     //     countUp.kcal++
     //     requestAnimationFrame(drawGraph);
 
-    } else if (countUp.fat < tracker.totals.fat - tracker.macros.fat / 50) {
+    } else if (countUp.kcal > tracker.totals.kcal) {
+        countUp.kcal = countUp.kcal - (tracker.macros.kcal / 240)
+        if (countUp.kcal < tracker.totals.kcal) {
+            countUp.kcal = tracker.totals.kcal
+        }
+        requestAnimationFrame(drawGraph);
+    // } else if (countUp.kcal < tracker.totals.kcal) {
+    //     countUp.kcal--
+    //     requestAnimationFrame(drawGraph);
+
+    } else if (countUp.fat < tracker.totals.fat) {
         countUp.fat = countUp.fat + (tracker.macros.fat / 240)
-        if (countUp.fat > tracker.totals.fat - tracker.macros.fat / 50) {
+        if (countUp.fat > tracker.totals.fat) {
             countUp.fat = tracker.totals.fat
         }
         requestAnimationFrame(drawGraph);
@@ -215,9 +340,19 @@ function drawGraph() {
     //     countUp.fat++
     //     requestAnimationFrame(drawGraph);
 
-    } else if (countUp.carb < tracker.totals.carb - tracker.macros.carb / 50) {
+    } else if (countUp.fat > tracker.totals.fat) {
+        countUp.fat = countUp.fat - (tracker.macros.fat / 240)
+        if (countUp.fat < tracker.totals.fat) {
+            countUp.fat = tracker.totals.fat
+        }
+        requestAnimationFrame(drawGraph);
+    // } else if (countUp.fat < tracker.totals.fat) {
+    //     countUp.fat--
+    //     requestAnimationFrame(drawGraph);
+
+    } else if (countUp.carb < tracker.totals.carb) {
         countUp.carb = countUp.carb + (tracker.macros.carb / 240)
-        if (countUp.carb > tracker.totals.carb - tracker.macros.carb / 50) {
+        if (countUp.carb > tracker.totals.carb) {
             countUp.carb = tracker.totals.carb
         }
         requestAnimationFrame(drawGraph);
@@ -225,14 +360,34 @@ function drawGraph() {
     //     countUp.carb++
     //     requestAnimationFrame(drawGraph);
 
-    } else if (countUp.protein < tracker.totals.protein - tracker.macros.protein / 50) {
+    } else if (countUp.carb > tracker.totals.carb) {
+        countUp.carb = countUp.carb - (tracker.macros.carb / 240)
+        if (countUp.carb < tracker.totals.carb) {
+            countUp.carb = tracker.totals.carb
+        }
+        requestAnimationFrame(drawGraph);
+    // } else if (countUp.carb < tracker.totals.carb) {
+    //     countUp.carb--
+    //     requestAnimationFrame(drawGraph);
+
+    } else if (countUp.protein < tracker.totals.protein) {
         countUp.protein = countUp.protein + (tracker.macros.protein / 240)
-        if (countUp.protein > tracker.totals.protein - tracker.macros.protein / 50) {
+        if (countUp.protein > tracker.totals.protein) {
             countUp.protein = tracker.totals.protein
         }
         requestAnimationFrame(drawGraph);
     // } else if (countUp.protein < tracker.totals.protein) {
     //     countUp.protein++
+    //     requestAnimationFrame(drawGraph);
+
+    } else if (countUp.protein > tracker.totals.protein) {
+        countUp.protein = countUp.protein - (tracker.macros.protein / 240)
+        if (countUp.protein < tracker.totals.protein) {
+            countUp.protein = tracker.totals.protein
+        }
+        requestAnimationFrame(drawGraph);
+    // } else if (countUp.protein < tracker.totals.protein) {
+    //     countUp.protein--
     //     requestAnimationFrame(drawGraph);
 
     } else {

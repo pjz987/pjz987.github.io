@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
     <link rel="stylesheet" type="text/css" href="macro-tracker.css">
     <link href="https://fonts.googleapis.com/css?family=Odibee+Sans&display=swap" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
 
     <script src="macro-tracker.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
@@ -29,7 +29,7 @@
     
     <main class="day">
 
-    <div id="outer-day">
+    <div id="outer-day" :class="[showEntry ? blurBk : '', classBk]">
         
         <div id="goals-container">
             <header class="small">Goals</header>
@@ -67,7 +67,7 @@
         </div>
         
         <div id="entries-container">
-            <header class="small">Entries:</header>
+            <header class="small">Entries</header>
             <div id="inner-entry">
                 <!-- {% for entry in day.diary_entry.all %} -->
                 <div class="entry" v-for="entry in entries">
@@ -86,20 +86,45 @@
                 <header class="smaller">Carbs (g)</header>
                 <header class="smaller">Protein (g)</header>
                 
-                <div v-for="entry in entries">
-                <div class="name">{{ entry.name }}</div>
-                <div>{{ entry.kcal }}</div>
-                <div>{{ entry.fat }}</div>
-                <div>{{ entry.carb }}</div>
-                <div>{{ entry.protein }}</div>
-                </div>
+                <template v-for="entry in entries">
+                    <!-- <transition-group name="slide" mode="out-in"> -->
+                        <div class="name" @click="remove(entry)" :entry="entry">{{ entry.name }}</div>
+                        <div>{{ entry.kcal }}</div>
+                        <div>{{ entry.fat }}</div>
+                        <div>{{ entry.carb }}</div>
+                        <div>{{ entry.protein }}</div>
+                    <!-- </transition-group> -->
+                </template>
+
+                <!-- <template v-for="entry in entries">
+                    <entry-template :entry="entry"></entry-template>
+                </template> -->
             </div>
     
         </div>
     </div>
     
     <div id="buttons-container">
-        <a href="#"><button class="buttons">Add Entry!</button></a>
+        <button class="buttons" @click="toggleEntry">Add Entry!</button>
+    </div>
+    
+    <div id="entry-form" class="middle-container" v-show="showEntry" transition="popup">
+
+        <header class="small">Add Entry</header>
+        
+        <custom-name v-model:name="name"></custom-name>
+
+        <custom-kcal v-model:kcal="kcal"></custom-kcal>
+
+        <custom-fat v-model:fat="fat"></custom-fat>
+        
+        <custom-carb v-model:carb="carb"></custom-carb>
+        
+        <custom-protein v-model:protein="protein"></custom-protein>
+
+        <!-- @click="trackIt" goes in the button below -->
+        <button @click="[trackIt(), toggleEntry()]">Track It!</button>
+
     </div>
     
     </main>
