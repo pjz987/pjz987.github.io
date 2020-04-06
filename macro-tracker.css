@@ -141,8 +141,13 @@ canvas {
 }
 
 #entries-grid {
+    height: 352px;
     display: grid;
     grid-template-columns: repeat(5, auto);
+    /* grid-template-rows: repeat(auto-fit, auto) auto; */
+    grid-template-rows: 1fr auto;
+    align-content: space-between;
+    overflow-y: auto;
     column-gap: 1vw;
     row-gap: 1vh;
     overflow-y: auto;
@@ -341,4 +346,8 @@ input[type=number] {
 .popup-enter, .popup-leave {
     opacity: 0;
     margin-bottom: 0%;
+}
+
+.totals {
+    border-top: 2px solid black;
 }

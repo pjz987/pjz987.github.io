@@ -96,6 +96,14 @@
                     <!-- </transition-group> -->
                 </template>
 
+                <template v-show="entries.length>=1">
+                    <div class="name totals">Totals</div>
+                    <div class="totals">{{ totals.kcal }}</div>
+                    <div class="totals">{{ totals.fat }}</div>
+                    <div class="totals">{{ totals.carb }}</div>
+                    <div class="totals">{{ totals.protein }}</div>
+                </template>
+
                 <!-- <template v-for="entry in entries">
                     <entry-template :entry="entry"></entry-template>
                 </template> -->
@@ -123,7 +131,7 @@
         <custom-protein v-model:protein="protein"></custom-protein>
 
         <!-- @click="trackIt" goes in the button below -->
-        <button @click="[trackIt(), toggleEntry()]">Track It!</button>
+        <button id="track-it-button" @click="checkEntry">Track It!</button>
 
     </div>
     

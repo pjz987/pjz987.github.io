@@ -23,6 +23,10 @@ main {
     align-items: center;
 }
 
+/* #app span, #app div {
+    background: hsla(0, 0%, 0%, 0.5);
+} */
+
 .slide-enter-active, .slide-leave-active {
     transition: opacity .4s, margin .4s;
 }

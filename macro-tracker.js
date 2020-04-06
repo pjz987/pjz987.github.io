@@ -6,29 +6,28 @@ let customName = {
     </div>`
 };
 
-let nameInput = document.querySelector('#name-input');
 
 let customKcal = {
     props: ['kcal'],
     template: `<div>
-        <span>Calories:</span>
-        <input value="990" class="custom" type="number" :kcal="kcal" @input="$emit('input', $event.target.value)">
+    <span>Calories:</span>
+    <input id="kcal-input" value="990" class="custom" type="number" :kcal="kcal" @input="$emit('input', $event.target.value)">
     </div>`
 };
 
 let customFat = {
     props: ['fat'],
     template: `<div>
-        <span>Grams of Fat</span>
-        <input value="30" class="custom" type="number" :fat="fat" @input="$emit('input', $event.target.value)">
+    <span>Grams of Fat</span>
+    <input id="fat-input" value="30" class="custom" type="number" :fat="fat" @input="$emit('input', $event.target.value)">
     </div>`
 };
 
 let customCarb = {
     props: ['carb'],
     template: `<div>
-        <span>Grams of Carbohydrates:</span>
-        <input value="124" class="custom" type="number" :carb="carb" @input="$emit('input', $event.target.value)">
+    <span>Grams of Carbohydrates:</span>
+        <input id="carb-input" value="124" class="custom" type="number" :carb="carb" @input="$emit('input', $event.target.value)">
     </div>`
 };
 
@@ -36,19 +35,19 @@ let customProtein = {
     props: ['protein'],
     template: `<div>
         <span>Grams of Protein:</span>
-        <input value="54" class="custom" type="number" :protein="protein" @input="$emit('input', $event.target.value)">
+        <input id="protein-input" value="54" class="custom" type="number" :protein="protein" @input="$emit('input', $event.target.value)">
     </div>`
 };
 
 let entryTemplate = {
     props: ['entry'],
     template: `<template>
-        <div class="name" @click="remove(entry)" :entry="entry">{{ entry.name }}</div>
+    <div class="name" @click="remove(entry)" :entry="entry">{{ entry.name }}</div>
         <div>{{ entry.kcal }}</div>
         <div>{{ entry.fat }}</div>
         <div>{{ entry.carb }}</div>
         <div>{{ entry.protein }}</div>
-    </template>`
+        </template>`
 }
 
 var tracker = new Vue({
@@ -86,17 +85,17 @@ var tracker = new Vue({
                 protein: 0,
             }
             let keys = Object.keys(totalsObj);
-            console.log(keys);
+            // console.log(keys);
             for (let i=0; i<this.entries.length; i++) {
                 let entry = this.entries[i];
                 for (let j=0; j<keys.length; j++) {
                     let key = keys[j]
-                    console.log(key, 'hey')
+                    // console.log(key, 'hey')
                     totalsObj[key] += entry[key];
-                    console.log(totalsObj, 'totalsobj')
+                    // console.log(totalsObj, 'totalsobj')
                 }
             }
-            console.log(totalsObj)
+            // console.log(totalsObj)
             this.totals = totalsObj;
             drawGraph();
         },
@@ -105,7 +104,25 @@ var tracker = new Vue({
         toggleEntry: function() {
             this.showEntry = !this.showEntry;
         },
+
+        checkEntry: function() {
+            console.log('check')
+            let inputArr = [this.kcal, this.fat, this.carb, this.protein];
+            console.log(inputArr)
+            let flagNaN = false;
+            for (let i=0; i<inputArr.length; i++) {
+                if (isNaN(parseInt(inputArr[i]))) {
+                    flagNaN = true;
+                    console.log('flag')
+                };
+            };
+            if (!flagNaN) {
+                this.trackIt();
+            }
+        },
+
         trackIt: function() {
+
             this.entries.push({
                 name: this.name,
                 kcal: parseInt(this.kcal),
@@ -113,16 +130,29 @@ var tracker = new Vue({
                 carb: parseInt(this.carb),
                 protein: parseInt(this.protein),
             });
+
             this.name = '';
-            this.kcal = '';
-            this.fat = '';
-            this.carb = '';
-            this.protien = '';
+            nameInput.value = '';
+
+            this.kcal = '0';
+            kcalInput.value = '';
+
+            this.fat = '0';
+            fatInput.value = '';
+
+            this.carb = '0';
+            carbInput.value = '';
+
+            this.protein = '0';
+            proteinInput.value = '';
+
+            this.toggleEntry();
         },
+
         remove: function(entry) {
-            console.log('remove', entry)
+            // console.log('remove', entry)
             let index = this.entries.indexOf(entry)
-            console.log(index)
+            // console.log(index)
             this.entries.splice(index, 1);
         },
     },
@@ -135,6 +165,25 @@ var tracker = new Vue({
         'entry-template': entryTemplate,
     },
 })
+
+let nameInput = document.querySelector('#name-input');
+let kcalInput = document.querySelector('#kcal-input');
+let fatInput = document.querySelector('#fat-input');
+let carbInput = document.querySelector('#carb-input');
+let proteinInput = document.querySelector('#protein-input');
+
+let trackItButton = document.querySelector('#track-it-button');
+// trackItButton.addEventListener('click', function(e) {
+//     let inputArr = [tracker.kcal, tracker.fat, tracker.carb, tracker.protein];
+//     console.log(inputArr);
+//     for (let i=0; i<inputArr.length; i++) {
+//         if (isNaN(inputArr[i])) {
+//             console.log(e, 'hey bitch')
+//             e.preventDefault();
+//         };
+//     };
+// });
+
 
 // var overUnder = JSON.parse(document.querySelector('#over_under').textContent);
 
