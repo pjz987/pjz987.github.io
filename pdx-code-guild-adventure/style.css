@@ -1,0 +1,30 @@
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+* {
+  font-family: 'Raleway', sans-serif;
+  font-size: medium;
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #A9AFE0;
+  flex-direction: column;
+}
+
+canvas {
+  border: 2px solid black;
+  border-radius: 100px;
+}
+
+img {
+  display: none;
+}
