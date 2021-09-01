@@ -14,16 +14,18 @@
     <script src="intro.js" defer></script>
 
     <title>Pete Jones | Full Stack Developer</title>
+
+		<meta name="description" content="Personal Portfolio for Pete Jones">
 </head>
 <body>
     <main>
         <canvas width="1920" height="1080"></canvas>
         <div id="app">
-          <span @click="backward"><</span>
+          <span @click="backward">&lt;</span>
           <transition name="slide" mode="out-in">
             <component :is="slides[i]"></component>
           </transition>
-          <span @click="forward">/></span>
+          <span @click="forward">/&gt;</span>
         </div>
     </main>
 </body>
