@@ -1,36 +1,77 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<!-- CHARSET AND VIEWPORT -->
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge,chrome=1">
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
-    <link href="https://fonts.googleapis.com/css?family=Odibee+Sans&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="intro.css">
+	<!-- LINKS -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+	<link href="https://fonts.googleapis.com/css?family=Odibee+Sans&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="intro.css">
+	<link rel="home" href="https://peterwilliamjones.com/">
 
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-    <script src="rainbow.js" defer></script>
-    <script src="intro.js" defer></script>
+	<!-- THEME COLOR -->
+	<meta name="theme-color" content="#32a914">
 
-    <title>Pete Jones | Full Stack Developer</title>
 
-		<meta name="description" content="Personal Portfolio for Pete Jones">
-		<!-- open graph -->
-		<meta property="og:type" content="website" />
-		<meta property="og:title" content="Pete Jones | Web Developer">
-		<meta property="og:description" content="Web Developer, Musician & Game Design Hobbyist Based in Portland, Oregon">
+	<title>Pete Jones | Full Stack Developer</title>
+
+	<!-- TITLE DESCRIPTION REFERRER ROBOTS -->
+	<title>Beginner's Guide to SEO [Search Engine Optimization] - Moz</title>
+	<meta name="description" content="Web Developer, Musician & Game Design Hobbyist Based in Portland, Oregon">
+	<meta name="referrer" content="no-referrer-when-downgrade">
+	<meta name="robots" content="all">
+
+	<!-- open graph -->
+	<meta property="og:locale" content="en_US" />
+	<meta property="og:type" content="website" />
+	<meta property="og:title" content="Pete Jones | Web Developer">
+	<meta property="og:description" content="Web Developer, Musician & Game Design Hobbyist Based in Portland, Oregon">
+
+	<!-- add an image -->
+	<!-- <meta
+    content="https://moz.com/cms/_1200x630_crop_center-center_82_none/BGSEO_intro_V3-01.png?mtime=20190327131722&amp;focal=none&amp;tmtime=20210628145917"
+    property="og:image">
+	<meta content="1050" property="og:image:width">
+	<meta content="630" property="og:image:height"> -->
+
+	<meta property="og:see_also" content="https://instagram.com/pjz987/">
+	<meta property="og:see_also" content="https://www.linkedin.com/in/pjones87/">
+	<meta content="https://twitter.com/pjz987/" property="og:see_also">
+	
+	<!-- TWITTER -->
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:site" content="@pjz987">
+	<meta name="twitter:creator" content="@pjz987">
+	<meta name="twitter:title" content="Beginner's Guide to SEO [Search Engine Optimization]">
+	<meta name="twitter:description"
+			content="Web Developer, Musician & Game Design Hobbyist Based in Portland, Oregon">
+	<!-- todo: twitter image -->
+	<!-- <meta name="twitter:image"
+			content="https://moz.com/cms/_800x418_crop_center-center_82_none/BGSEO_intro_V3-01.png?mtime=20190327131722&amp;focal=none&amp;tmtime=20210628145918">
+	<meta name="twitter:image:width" content="1050">
+	<meta name="twitter:image:height" content="630"> -->
+
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	<script src="rainbow.js" defer></script>
+	<script src="intro.js" defer></script>
 </head>
+
 <body>
-    <main>
-        <canvas width="1920" height="1080"></canvas>
-        <div id="app">
-          <span @click="backward">&lt;</span>
-          <transition name="slide" mode="out-in">
-            <component :is="slides[i]"></component>
-          </transition>
-          <span @click="forward">/&gt;</span>
-        </div>
-    </main>
+	<main>
+		<canvas width="1920" height="1080"></canvas>
+		<div id="app">
+			<span @click="backward">&lt;</span>
+			<transition name="slide" mode="out-in">
+				<component :is="slides[i]"></component>
+			</transition>
+			<span @click="forward">/&gt;</span>
+		</div>
+	</main>
 </body>
+
 </html>
